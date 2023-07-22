@@ -5,6 +5,9 @@ Research credit to:
 - [@filip_dragovic](https://twitter.com/filip_dragovic)
 - Ported from [@mpgn](https://twitter.com/mpgn_x64) Windows [PoC](https://github.com/mpgn/BackupOperatorToDA)
 
+Forked from :
+- https://github.com/horizon3ai/backup_dc_registry
+
 ## Usage
 This proof of concept is a modified version of impacket/examples/reg.py and will work with the most recent impacket release installed. All supported impacket authentication mechanisms will work.
 
