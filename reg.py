@@ -171,6 +171,12 @@ class RegHandler:
         
         if self.__action == 'BACKUP':
             self.__remoteOps.connectWinReg()
+#        elif self.__action == 'BACKUPSAM':
+#            self.__remoteOps.connectWinReg()
+#        elif self.__action == 'BACKUPSYSTEM':
+#            self.__remoteOps.connectWinReg()
+#        elif self.__action == 'BACKUPSECURITY':
+#            self.__remoteOps.connectWinReg()
         else:
             try:
                 self.__remoteOps.enableRegistry()
@@ -191,6 +197,12 @@ class RegHandler:
             elif self.__action == 'BACKUP':
                 for hive in ['HKLM\\SAM', 'HKLM\\SYSTEM', 'HKLM\\SECURITY']:
                     self.backup(dce, hive)
+            elif self.__action == 'BACKUPSAM':
+                self.backup(dce, 'HKLM\\SAM')
+            elif self.__action == 'BACKUPSYSTEM':
+                self.backup(dce, 'HKLM\\SYSTEM')
+            elif self.__action == 'BACKUPSECURITY':
+                self.backup(dce, 'HKLM\\SECURITY')
             else:
                 logging.error('Method %s not implemented yet!' % self.__action)
         except (Exception, KeyboardInterrupt) as e:
@@ -558,6 +570,12 @@ if __name__ == '__main__':
     # A backup command - for abusing Backup Operator permissions
     backup_parser = subparsers.add_parser('backup', help='Saves a copy of SAM, SYSTEM, and SECURITY at the specified path.')
     backup_parser.add_argument('-path', action='store', required=True, help='The UNC path to store the registry values')
+    backupsam_parser = subparsers.add_parser('backupsam', help='Saves a copy of SAM at the specified path.')
+    backupsam_parser.add_argument('-path', action='store', required=True, help='The UNC path to store the registry values')
+    backupsystem_parser = subparsers.add_parser('backupsystem', help='Saves a copy of SYSTEM at the specified path.')
+    backupsystem_parser.add_argument('-path', action='store', required=True, help='The UNC path to store the registry values')
+    backupsecurity_parser = subparsers.add_parser('backupsecurity', help='Saves a copy of SECURITY at the specified path.')
+    backupsecurity_parser.add_argument('-path', action='store', required=True, help='The UNC path to store the registry values')
 
     # A copy command
     # copy_parser = subparsers.add_parser('copy', help='Copies a registry entry to a specified location in the remote '
